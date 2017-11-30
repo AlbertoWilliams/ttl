@@ -31,8 +31,22 @@ Try run the executable file build/ttlc and input following sentences:
 
 > 0 || -2 + (-2) / 2
 
+If you have a file a.txt, in which it contains:
+
+> a = 3;
+> b = 4;
+> a += b;
+> return a;
+
+You can input following sentence after ttlc prompt:
+
+> include(a.txt)
+
+or
+
+> return include(a.txt);
+
 # TODO
 1. add 'if-else', 'for' sentences
-2. fix bugs('include')
-3. add mathematics functions
+2. add mathematics functions
 
