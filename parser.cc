@@ -178,6 +178,8 @@ namespace ttl {
 
         ast_tree_->AddChild(p.ast_tree_);
         p.ast_tree_ = NULL;
+
+        tokenizer_.NextToken(current_token_);
     }
 
     void Parser::CreateNow() {
