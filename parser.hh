@@ -43,7 +43,7 @@ namespace ttl {
         Module * CreateTorusModule(); // well, different style, but less code
         void CreateIf();
         void CreateReturn();
-        void CreateNow();
+        void CreateNow(); // return the number of seconds since epoch
         void CreateAssign(const std::string& name, double (*op)(double, double), bool check_rhs);
         // process variable creation and calculation.
         void CreateVariable(const std::string& name);

@@ -13,6 +13,7 @@
 #include <string.h> // for strlen
 #include <map>
 #include <functional>
+#include <time.h>
 #include "parser.hh"
 #include "common.hh"
 
@@ -257,6 +258,22 @@ namespace ttl {
     }
 
     void Parser::CreateNow() {
+        time_t time = ::time(NULL);
+        tokenizer_.NextToken(current_token_);
+        if (current_token_.token_type != Tokenizer::TOKEN_LEFT_BANANA) {
+            error_code_ = 1;
+            return;
+        }
+
+        tokenizer_.NextToken(current_token_);
+        if (current_token_.token_type != Tokenizer::TOKEN_RIGHT_BANANA) {
+            error_code_ = 1;
+            return;
+        }
+
+        Num * num = new Num(time);
+        ast_tree_->AddChild(num);
+        tokenizer_.NextToken(current_token_);
     }
 
     void Parser::CreateAssign(const std::string& name, double (*op)(double, double), bool check_rhs) {
