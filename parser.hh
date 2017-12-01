@@ -36,8 +36,9 @@ namespace ttl {
 
     private:
         Parser(std::list<std::string> * module_name_stack);
-        void CreateModule();
+        void CreateModule(long end_type);
         void CreateSentence();
+        Module * CreateTorusModule(); // well, different style, but less code
         void CreateIf();
         void CreateReturn();
         void CreateNow();

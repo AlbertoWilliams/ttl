@@ -75,7 +75,7 @@ namespace ttl {
 
         module_name_stack_->push_back("plugin.conf");
         ast_tree_ = new Module(Constants::DEFAULT_RETURN_VALUE);
-        CreateModule();
+        CreateModule(Tokenizer::TOKEN_EOL);
         module_name_stack_->pop_back();
 
         return error_code_ == 0 && ast_tree_ != NULL;
@@ -85,11 +85,17 @@ namespace ttl {
         return ast_tree_->Evaluate();
     }
 
-    void Parser::CreateModule() {
+    void Parser::CreateModule(long end_type) {
         do {
             tokenizer_.NextToken(current_token_);
+
+            if (current_token_.token_type == end_type) {
+                break;
+            }
+
             CreateSentence();
-            if (current_token_.token_type == Tokenizer::TOKEN_EOL) {
+
+            if (current_token_.token_type == end_type) {
                 break;
             }
 
@@ -100,7 +106,75 @@ namespace ttl {
         return;
     }
 
+    Module * Parser::CreateTorusModule() {
+        if (current_token_.token_type != Tokenizer::TOKEN_LEFT_TORUS) {
+            error_code_ = 1;
+            return NULL;
+        }
+
+        Module * origin_ast = ast_tree_;
+        ast_tree_ = new Module(Constants::DEFAULT_RETURN_VALUE);
+        CreateModule(Tokenizer::TOKEN_RIGHT_TORUS);
+
+        if (current_token_.token_type != Tokenizer::TOKEN_RIGHT_TORUS) {
+            error_code_ = 1;
+            delete ast_tree_;
+            ast_tree_ = origin_ast;
+            return NULL;
+        }
+
+        Module * torus_module = ast_tree_;
+        ast_tree_ = origin_ast;
+        return torus_module;
+    }
+
     void Parser::CreateIf() {
+        Module * torus_module = NULL;
+        If * if_op = new If();
+
+        do {
+            tokenizer_.NextToken(current_token_);
+            CreateValue(); // create 'condition'
+            if (error_code_ != 0) {
+                delete if_op;
+                return;
+            }
+
+            Operator * condition = NULL;
+            if (ast_tree_->PopLastChild(&condition) == false) {
+                delete if_op;
+                error_code_ = 1;
+                return;
+            }
+            if_op->AddChild(condition);
+
+            torus_module = CreateTorusModule();
+            if (torus_module == NULL) {
+                delete if_op;
+                return;
+            }
+            if_op->AddChild(torus_module);
+
+            tokenizer_.NextToken(current_token_);
+            if (current_token_.token_type != Tokenizer::TOKEN_NAME ||
+                strncmp(current_token_.token_pos, "else", strlen("else")) != 0) {
+                ast_tree_->AddChild(if_op);
+                return; // if ( ... ) { ... }
+            }
+            tokenizer_.NextToken(current_token_);
+        } while (current_token_.token_type == Tokenizer::TOKEN_NAME &&
+                 strncmp(current_token_.token_pos, "if", strlen("if")) == 0);
+
+        torus_module = CreateTorusModule();
+        if (torus_module == NULL) {
+            delete if_op;
+            return;
+        }
+
+        if_op->AddChild(torus_module);
+        ast_tree_->AddChild(if_op);
+        tokenizer_.NextToken(current_token_);
+        return;
     }
 
     void Parser::CreateReturn() {

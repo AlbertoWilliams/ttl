@@ -181,10 +181,18 @@ namespace ttl {
     class If : public Operator {
     public:
         virtual double Evaluate() {
-            if (children_[0]->Evaluate()) {
-                return children_[1]->Evaluate();
+            int i = 0;
+            for (i = 0; i + 1 < children_.size(); i += 2) {
+                if (children_[i]->Evaluate()) {
+                    return children_[i + 1]->Evaluate();
+                }
+            }
+
+            if (i + 1 == children_.size()) {
+                // return the last else: if (...) { ... } else { ... }
+                return children_[i]->Evaluate();
             } else {
-                return children_[2]->Evaluate();
+                return 0; // take no effect when: if (false) { ... }
             }
         }
     };
