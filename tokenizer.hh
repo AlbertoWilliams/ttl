@@ -1,5 +1,5 @@
 /**
- * tokenizer.h - tokenizer
+ * tokenizer.hh - tokenizer
  *
  * Author: Bao Hexing <HexingB@qq.com>
  * Created: 13 November 2017

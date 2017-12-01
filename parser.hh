@@ -1,5 +1,5 @@
 /**
- * parser.h - ast parser
+ * parser.hh - ast parser
  *
  * Author: Bao Hexing <HexingB@qq.com>
  * Created:  7 November 2017

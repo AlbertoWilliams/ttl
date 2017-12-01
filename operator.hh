@@ -1,5 +1,5 @@
 /**
- * operator.h - operators for abstract syntax tree
+ * operator.hh - operators for abstract syntax tree
  *
  * Author: Bao Hexing <HexingB@qq.com>
  * Created:  7 November 2017

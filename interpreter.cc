@@ -1,5 +1,5 @@
 /**
- * interpreter.cpp - interperter
+ * interpreter.cc - interperter
  *
  * Author: Bao Hexing <HexingB@qq.com>
  * Created: 25 November 2017

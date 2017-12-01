@@ -1,5 +1,5 @@
 /**
- * scorer.cpp - scorer implementation
+ * parser.cc - create the ast
  *
  * Author: Bao Hexing <HexingB@qq.com>
  * Created:  7 November 2017

@@ -1,5 +1,5 @@
 /**
- * common.cpp - common utilities
+ * common.cc - common utilities
  *
  * Author: Bao Hexing <HexingB@qq.com>
  * Created: 25 November 2017
