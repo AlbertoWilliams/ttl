@@ -27,6 +27,7 @@ namespace ttl {
         bool PushBack(const Token& t);
         void Reset(const char * buffer);
         unsigned int ProcessedLength() const;
+        int Context(std::string& c) const;
 
     private:
         void TwoCharSymbolToken(Token& token,

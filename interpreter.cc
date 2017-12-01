@@ -28,6 +28,9 @@ int main(int argc, char ** argv) {
         bool ret = p.Create(line);
         if (ret == false) {
             std::cerr << "Error to create ast: " << p.ErrorMsg() << std::endl;
+            std::string msg;
+            p.ErrorContext(msg);
+            std::cerr << msg << std::endl;
         } else {
             double result = p.Evaluate();
             std::cout << result << std::endl;

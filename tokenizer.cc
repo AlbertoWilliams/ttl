@@ -24,6 +24,19 @@ namespace ttl {
         return pos_ - buffer_;
     }
 
+    int Tokenizer::Context(std::string& c) const {
+        const char * end = pos_;
+        for (int i = 0; i < 40 && (*end) != '\0' && (*end) != '\n'; ++i, ++end)
+            ;
+
+        const char * start = pos_;
+        for (int i = 0; i < 40 && start != buffer_; ++i, --start)
+            ;
+
+        c = std::string(start, end - start);
+        return pos_ - start;
+    }
+
     void Tokenizer::GetToken(Token & t, long type, const char * pos, int length) {
         t.token_type = type;
         t.token_pos = pos;

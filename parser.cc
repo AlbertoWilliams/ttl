@@ -711,4 +711,11 @@ namespace ttl {
         return ERROR_MESSAGE[error_code_];
     }
 
+    void Parser::ErrorContext(std::string& msg) const {
+        if (error_code_ != 0) {
+            int pos = tokenizer_.Context(msg);
+            msg += std::string("\n") + std::string(pos, ' ') + std::string("^");
+        }
+    }
+
 }  // ttl

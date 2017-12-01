@@ -34,6 +34,8 @@ namespace ttl {
         // return error message if Init() failed, or ""
         const char * ErrorMsg() const;
 
+        void ErrorContext(std::string& msg) const;
+
     private:
         Parser(std::list<std::string> * module_name_stack);
         void CreateModule(long end_type);
