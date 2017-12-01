@@ -1,6 +1,6 @@
 # Tiny Toy Language
 
-A mixture of mathematics calculation and a subset of C-like expression language.
+A mixture of mathematic calculation and a subset of C-like expression language.
 
 # dependency
 
@@ -31,6 +31,8 @@ Try run the executable file build/ttlc and input following sentences:
 
 > 0 || -2 + (-2) / 2
 
+> if ( 2 > 3) { return 4; } else if ( 5 > 6) { return 7; } else if ( 7 < (8 && 1)) { return 9; } else if ( 9 < 10) { return 11;}
+
 If you have a file a.txt, in which it contains:
 
 > a = 3;
@@ -47,6 +49,6 @@ or
 > return include(a.txt);
 
 # TODO
-1. add 'if-else', 'for' sentences
-2. add mathematics functions
+1. add mathematic functions
+2. fix bug
 
