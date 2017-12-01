@@ -6,6 +6,9 @@ A mixture of mathematic calculation and a subset of C-like expression language.
 
 0. cmake 3.0
 1. libreadline.so.7
+   If you have lower libreadline.so, you may need to add 
+   > target_link_libraries(ttlc ncurses)
+   at the end of CMakeLists.txt.
 
 # build
 
