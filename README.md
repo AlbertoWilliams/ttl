@@ -55,8 +55,9 @@ or
 
 # TODO
 1. add mathematic functions
-2. fix bug
+2. add '"' symbol for path quote in 'include'
+3. add variable name pattern check
+4. fix bug
    * "aa = 4; return a;" should be "variable not defined", not "bad syntax"
    * "if (2 < 3) { a = 4; } return a;" should be "variable not defined", while "if (2 < 3) { a = 4; return a;}" should be OK
-   * add '"' symbol for path quote in 'include'
 
