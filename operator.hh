@@ -23,7 +23,7 @@ namespace ttl {
 
         Operator()  : children_() {}
 
-        ~Operator() {
+        virtual ~Operator() {
             for (int i = 0; i < children_.size(); ++i) {
                 delete children_[i];
             }
@@ -49,7 +49,7 @@ namespace ttl {
             return_value_ = &(variables_.find("return")->second);
         }
 
-        ~Module() {}
+        virtual ~Module() {}
 
         bool PopLastChild(Operator ** child) {
             if (child == NULL || children_.size() == 0) {

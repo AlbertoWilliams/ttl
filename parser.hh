@@ -22,7 +22,7 @@ namespace ttl {
     class Parser {
     public:
         Parser();
-        ~Parser();
+        virtual ~Parser();
 
         static bool Init();
 
